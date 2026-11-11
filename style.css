@@ -1,4 +1,3 @@
-
 /* =================================
    1. GENERAL SETTINGS
 ================================= */
@@ -29,17 +28,19 @@ body {
 ================================= */
 
 .site-header {
-    background: linear-gradient(135deg, #58457b, #97c7d8);
+    background: linear-gradient(135deg, #9082ad, #1c1c1d);
     color: white;
     padding: 35px 5%;
 }
 
+/* FIX #2: columns now scale (1fr 2fr 1fr) instead of a fixed 130px,
+   so the logos no longer spill out and squeeze the text. */
 .header-content {
     max-width: 1250px;
     margin: auto;
 
     display: grid;
-    grid-template-columns: 130px 1fr 130px;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     gap: 25px;
 }
@@ -50,19 +51,20 @@ body {
     justify-content: center;
 }
 
-.school-logo {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
+/* FIX #2: one shared rule for both logos.
+   width: 100% fills the column, max-width caps the size,
+   height: auto keeps the correct proportions. */
+.school-logo,
 .club-logo {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 160px;
+    height: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
-
+.school-logo {
+    max-width: 240px;
+}
 .school-logo:hover,
 .club-logo:hover {
     transform: scale(1.08);
@@ -333,15 +335,16 @@ hr {
         padding: 25px 15px;
     }
 
+    /* FIX #2 (mobile): keep the scaling columns, just a smaller gap */
     .header-content {
-        grid-template-columns: 65px 1fr 65px;
+        grid-template-columns: 1fr 2fr 1fr;
         gap: 10px;
     }
 
+    /* FIX #2 (mobile): smaller logo cap; width/height stay automatic */
     .school-logo,
     .club-logo {
-        width: 60px;
-        height: 60px;
+        max-width: 65px;
     }
 
     .header-text h1 {
@@ -356,12 +359,14 @@ hr {
         font-size: 12px;
     }
 
-    nav {
+    /* FIX #3: use the class selector so this rule beats the desktop
+       .main-navigation rule (a plain "nav" selector lost the fight). */
+    .main-navigation {
         gap: 12px 20px;
         padding: 15px 10px;
     }
 
-    nav a {
+    .main-navigation a {
         font-size: 13px;
     }
 
